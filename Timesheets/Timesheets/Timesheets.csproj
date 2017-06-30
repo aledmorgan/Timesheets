@@ -110,6 +110,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Client\Images\" />
+    <Folder Include="Client\Scripts\" />
+    <Folder Include="Client\Styles\" />
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
   </ItemGroup>
