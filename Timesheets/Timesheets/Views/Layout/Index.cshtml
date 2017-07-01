@@ -2,13 +2,29 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container">
-    <header></header>
-    <div class="col-xs-12 col-sm-2">
-        <!-- Some kind of nav here -->
-    </div>
-    <div class="col-xs-12 col-sm-10">
-        @{ Html.RenderPartial("Application"); }
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-9 col-lg-9 no-padding">
+            <header>
+                <h1>Timesheets</h1>
+            </header>
+            <div class="col-xs-12 content">
+                @{ Html.RenderPartial("Application"); }
+            </div>
+        </div>
+        <div class="col-sm-3 col-lg-3 no-padding navbar-wrapper">
+            <h2>Navigation</h2>
+            <nav class="navbar navbar-fixed-side">
+                <ul>
+                    <li>
+                        <a href="/#/create">Generate timesheets</a>
+                    </li>
+                    <li>
+                        <a href="/#/timesheets">Search</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
 </div>
 
