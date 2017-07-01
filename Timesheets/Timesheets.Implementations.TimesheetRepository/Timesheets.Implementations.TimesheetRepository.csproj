@@ -64,6 +64,10 @@
       <Project>{447fb732-1577-41d3-944c-91cf8b352896}</Project>
       <Name>Timesheets.Dtos</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Timesheets.Models\Timesheets.Models.csproj">
+      <Project>{46898932-c8d7-4ec0-9b13-d0f4c677da0b}</Project>
+      <Name>Timesheets.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -34,7 +34,7 @@ namespace Timesheets.Implementations.TimesheetRepository
             }
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
             try
             {
@@ -47,7 +47,7 @@ namespace Timesheets.Implementations.TimesheetRepository
             }
         }
 
-        public Timesheet Get(int id)
+        public Timesheet Get(string id)
         {
             try
             {

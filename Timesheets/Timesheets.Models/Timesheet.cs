@@ -6,6 +6,7 @@ namespace Timesheets.Models
 {
     public class Timesheet
     {
+        public string Id { get; set; }
         public string CandidateName { get; set; }
         public string ClientName { get; set; }
         public string JobTitle { get; set; }

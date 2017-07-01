@@ -886,6 +886,8 @@
   <ItemGroup>
     <Compile Include="App_Start\DIConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\LayoutController.cs" />
+    <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -921,10 +923,15 @@
     <Folder Include="Client\Images\" />
     <Folder Include="Client\Scripts\" />
     <Folder Include="Client\Styles\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Layout\" />
+    <Folder Include="Views\Service\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Timesheets.Contracts\Timesheets.Contracts.csproj">
+      <Project>{5C2D953D-BD32-4391-92FF-B2BF72C5C2BB}</Project>
+      <Name>Timesheets.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Timesheets.Dtos\Timesheets.Dtos.csproj">
       <Project>{447fb732-1577-41d3-944c-91cf8b352896}</Project>
       <Name>Timesheets.Dtos</Name>

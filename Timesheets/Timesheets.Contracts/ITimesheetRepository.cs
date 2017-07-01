@@ -7,9 +7,9 @@ namespace Timesheets.Contracts
 {
     public interface ITimesheetRepository
     {
-        Timesheet Get(int id);
+        Timesheet Get(string id);
         IEnumerable<Timesheet> GetAll();
-        void Delete(int id);
+        void Delete(string id);
         void Create(Timesheet newTimesheet);
     }
 }
