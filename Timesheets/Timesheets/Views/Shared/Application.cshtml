@@ -33,14 +33,16 @@
             <span class="error" ng-show="(form.$submitted || form.jobTitle.$touched) && form.jobTitle.$error.required">This is a required field</span>
         </div>
         <div class="form-group">
-            <label for="placementStart">Placement Start Date:</label>
-            <input type="text" class="form-control" ng-model="request.PlacementStartDate" name="placementStart" required>
+            <label for="placementStart">Placement Start Date (mm/dd/yyyy):</label>
+            <input type="text" class="form-control" ng-model="request.PlacementStartDate" name="placementStart" moment-valid-date required>
             <span class="error" ng-show="(form.$submitted || form.placementStart.$touched) && form.placementStart.$error.required">This is a required field</span>
+            <span class="error" ng-show="(form.$submitted || form.placementStart.$touched) && form.placementStart.$error.momentValidDate">Please enter a valid date</span>
         </div>
         <div class="form-group">
-            <label for="placementEnd">Placement End Date:</label>
-            <input type="text" class="form-control" ng-model="request.PlacementEndDate" name="placementEnd" required>
+            <label for="placementEnd">Placement End Date (dd/mm/yyyy):</label>
+            <input type="text" class="form-control" ng-model="request.PlacementEndDate" name="placementEnd" moment-valid-date required>
             <span class="error" ng-show="(form.$submitted || form.placementEnd.$touched) && form.placementEnd.$error.required">This is a required field</span>
+            <span class="error" ng-show="(form.$submitted || form.placementEnd.$touched) && form.placementEnd.$error.momentValidDate">Please enter a valid date</span>
         </div>
         <div class="form-group">
             <label for="placementType">Placement Type</label>

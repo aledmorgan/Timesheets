@@ -4,6 +4,7 @@ angular.module('timesheetsApp',
     [
         'timesheetsApp.controllers',
         'timesheetsApp.services',
+        'timesheetsApp.directives',
         'ngRoute'
     ]
 ).config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
