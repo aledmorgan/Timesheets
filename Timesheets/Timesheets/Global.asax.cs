@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Timesheets.App_Start;
 
 namespace Timesheets
 {
@@ -13,6 +14,7 @@ namespace Timesheets
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            DIConfig.Register();
         }
     }
 }

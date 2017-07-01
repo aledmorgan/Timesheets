@@ -46,6 +46,9 @@
     <Reference Include="Autofac, Version=4.6.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.4.6.0\lib\net45\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.4.0.2\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="AutoMapper, Version=6.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.6.1.1\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
@@ -881,6 +884,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\DIConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -919,6 +923,20 @@
     <Folder Include="Client\Styles\" />
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Timesheets.Dtos\Timesheets.Dtos.csproj">
+      <Project>{447fb732-1577-41d3-944c-91cf8b352896}</Project>
+      <Name>Timesheets.Dtos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Timesheets.Ioc\Timesheets.Ioc.csproj">
+      <Project>{3e409e07-4c7f-4282-9728-476782b2220e}</Project>
+      <Name>Timesheets.Ioc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Timesheets.Models\Timesheets.Models.csproj">
+      <Project>{46898932-c8d7-4ec0-9b13-d0f4c677da0b}</Project>
+      <Name>Timesheets.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
