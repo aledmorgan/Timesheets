@@ -52,10 +52,12 @@ namespace Timesheets.Implementations.TimesheetClient
         {
             if(request.PlacementType == Dtos.PlacementTypes.Weekly)
             {
-                return GetWeeklyTimesheets(request);
+                var datebands = GetWeeklyDatebands(request);
+                return GetTimesheetsFromDatebands(datebands, request);
             }else if(request.PlacementType == Dtos.PlacementTypes.Monthly)
             {
-                return GetMonthlyTimesheets(request);
+                var datebands = GetMonthlyDatebands(request);
+                return GetTimesheetsFromDatebands(datebands, request);
             }
             else
             {
@@ -63,91 +65,87 @@ namespace Timesheets.Implementations.TimesheetClient
             }
         }
 
-        private IEnumerable<Dtos.Timesheet> GetMonthlyTimesheets(Dtos.NewTimesheetsRequest request)
-        {
-            var startDate = request.PlacementStartDate.Day;
-            var endDate = request.PlacementEndDate.Day;
-            var startMonth = request.PlacementStartDate.Month;
-            var endMonth = request.PlacementEndDate.Month;
-            var startYear = request.PlacementStartDate.Year;
-            var endYear = request.PlacementEndDate.Year;
-
-            var ranges = new List<Range<DateTime>>();
-            var timesheets = new List<Dtos.Timesheet>();
-
-            while(startMonth <= endMonth && startYear <= endYear)
-            {
-                var rangeStart = new DateTime(startYear, startMonth, startDate);
-                var rangeEnd = new DateTime(endYear, endMonth, endDate);
-                var lastDay = _dateHelper.GetLastDayOfMonth(new DateTime(endYear, endMonth, endDate));
-
-                if(lastDay.Day > rangeEnd.Day && lastDay.Month == rangeEnd.Month && lastDay.Year == rangeEnd.Year)
-                {
-                    rangeEnd = new DateTime(endYear, endMonth, lastDay.Day);
-                }
-
-                ranges.Add(new Range<DateTime>() { Start = rangeStart, End = rangeEnd });
-
-                startMonth++;
-                startDate = 1;
-
-                if(startMonth > 12 && startYear < endYear)
-                {
-                    startMonth = 1;
-                    startYear++;
-                }
-            }
-
-            foreach(var range in ranges)
-            {
-                timesheets.Add(new Dtos.Timesheet()
-                {
-                    CandidateName = request.CandidateName,
-                    ClientName = request.ClientName,
-                    Id = request.Id,
-                    JobTitle = request.JobTitle,
-                    StartDate = range.Start,
-                    EndDate = range.End,
-                    PlacementType = request.PlacementType
-                });
-            }
-
-            return timesheets;
-        }
-
-        private IEnumerable<Dtos.Timesheet> GetWeeklyTimesheets(Dtos.NewTimesheetsRequest request)
+        private IEnumerable<Range<DateTime>> GetMonthlyDatebands(Dtos.NewTimesheetsRequest request)
         {
             var start = request.PlacementStartDate;
             var end = request.PlacementEndDate;
-            var ranges = new List<Range<DateTime>>();
-            var timesheets = new List<Dtos.Timesheet>();
+            var startReset = false;
+            var datebands = new List<Range<DateTime>>();
+
+            while(start < end)
+            {
+                var datebandStart = start;
+
+                if (!startReset)
+                {
+                    var startOfMonth = _dateHelper.GetFirstDayOfMonth(start);
+                    start = startOfMonth.AddMonths(1);
+                }
+                else
+                {
+                    start = start.AddMonths(1);
+                }
+
+                var datebandEnd = start.AddDays(-1);
+
+                if (datebandEnd > end)
+                {
+                    datebandEnd = end;
+                }
+
+                datebands.Add(new Range<DateTime>()
+                {
+                    Start = datebandStart,
+                    End = datebandEnd
+                });
+            }
+
+            return datebands;
+        }
+
+        private IEnumerable<Range<DateTime>> GetWeeklyDatebands(Dtos.NewTimesheetsRequest request)
+        {
+            var start = request.PlacementStartDate;
+            var end = request.PlacementEndDate;
+            var datebands = new List<Range<DateTime>>();
             var startReset = false;
 
             while(start < end)
             {
-                var startRange = start;
+                var datebandStart = start;
 
                 if (!startReset)
                 {
-                    var realStart = _dateHelper.GetFirstDayOfWeek(start);
-                    start = realStart.AddDays(7);
+                    var startOfWeek = _dateHelper.GetFirstDayOfWeek(start);
+                    start = startOfWeek.AddDays(7);
                 }
                 else
                 {
                     start = start.AddDays(7);
                 }
 
-                var endRange = startRange.AddDays(6);
+                var datebandEnd = datebandStart.AddDays(6);
 
-                if(endRange > end)
+                if(datebandEnd > end)
                 {
-                    endRange = end;
+                    datebandEnd = end;
                 }
 
-                ranges.Add(new Range<DateTime>() { Start = startRange, End = endRange });
+                datebands.Add(new Range<DateTime>()
+                {
+                    Start = datebandStart,
+                    End = datebandEnd
+                });
             }
 
-            foreach(var range in ranges)
+            return datebands;
+        }
+
+        private IEnumerable<Dtos.Timesheet> GetTimesheetsFromDatebands(IEnumerable<Range<DateTime>> datebands, Dtos.NewTimesheetsRequest request)
+        {
+            var timesheets = new List<Dtos.Timesheet>();
+
+            foreach (var dateband in datebands)
             {
                 timesheets.Add(new Dtos.Timesheet()
                 {
@@ -155,8 +153,8 @@ namespace Timesheets.Implementations.TimesheetClient
                     ClientName = request.ClientName,
                     Id = string.Empty,
                     JobTitle = request.JobTitle,
-                    EndDate = range.End,
-                    StartDate = range.Start,
+                    EndDate = dateband.End,
+                    StartDate = dateband.Start,
                     PlacementType = request.PlacementType
                 });
             }

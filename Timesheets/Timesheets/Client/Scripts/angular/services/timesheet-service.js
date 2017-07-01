@@ -19,7 +19,7 @@ angular.module('timesheetsApp.services', [])
             createTimesheet: function (request) {
                 return $http.post(
                     '/ServiceController/CreateTimesheet',
-                    {newTimesheet: request}
+                    {newTimesheets: request}
                 ).then(
                     function (response) {
                         return response;
