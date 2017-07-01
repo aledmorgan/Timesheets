@@ -9,8 +9,7 @@ namespace Timesheets.Contracts
     {
         Timesheet Get(int id);
         IEnumerable<Timesheet> GetAll();
-        Timesheet Delete(int id);
-        Timesheet Create(Timesheet newTimesheet);
-        Timesheet Update(Timesheet updateTimesheet);
+        void Delete(int id);
+        void Create(Timesheet newTimesheet);
     }
 }

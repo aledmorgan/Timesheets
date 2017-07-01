@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,29 +11,65 @@ namespace Timesheets.Implementations.TimesheetRepository
 {
     public class TimesheetRepository : ITimesheetRepository
     {
-        public Timesheet Create(Timesheet newTimesheet)
+        private IMongoCollection<Timesheet> _collection;
+        private const string _databaseName = "timesheetsDb";
+        private const string _collectionsName = "timesheets";
+
+        public TimesheetRepository()
         {
-            throw new NotImplementedException();
+            var client = new MongoClient();
+            var db = client.GetDatabase(_databaseName);
+            _collection = db.GetCollection<Timesheet>(_collectionsName);
         }
 
-        public Timesheet Delete(int id)
+        public void Create(Timesheet newTimesheet)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _collection.InsertOne(newTimesheet);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void Delete(int id)
+        {
+            try
+            {
+                var filter = Builders<Timesheet>.Filter.Eq("Id", id);
+                _collection.DeleteOne(filter);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public Timesheet Get(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var filter = Builders<Timesheet>.Filter.Eq("Id", id);
+                return _collection.Find(filter).First();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public IEnumerable<Timesheet> GetAll()
         {
-            throw new NotImplementedException();
-        }
-
-        public Timesheet Update(Timesheet updateTimesheet)
-        {
-            throw new NotImplementedException();
+            try
+            {
+                return _collection.Find(_ => true).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
