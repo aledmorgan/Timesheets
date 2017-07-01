@@ -9,7 +9,7 @@ namespace Timesheets.Dtos
 {
     public class Timesheet
     {
-        [BsonId(IdGenerator = typeof(GuidGenerator))]
+        [BsonId(IdGenerator = typeof(StringObjectIdGenerator))]
         public string Id { get; set; }
         public string CandidateName { get; set; }
         public string ClientName { get; set; }

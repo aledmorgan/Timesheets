@@ -14,6 +14,20 @@ angular.module('timesheetsApp.services', [])
                         console.log('Error retrieving timesheets');
                     }
                 );
+            },
+
+            createTimesheet: function (request) {
+                return $http.post(
+                    '/ServiceController/CreateTimesheet',
+                    {newTimesheet: request}
+                ).then(
+                    function (response) {
+                        return response;
+                    },
+                    function (response) {
+                        console.log('Error creating timesheet');
+                    }
+                    );
             }
         }
     }]);
