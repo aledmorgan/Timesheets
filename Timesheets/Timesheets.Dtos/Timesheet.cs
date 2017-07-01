@@ -15,9 +15,9 @@ namespace Timesheets.Dtos
         public string ClientName { get; set; }
         public string JobTitle { get; set; }
         [BsonDateTimeOptions(Kind = DateTimeKind.Local, DateOnly = true)]
-        public DateTime PlacementStartDate { get; set; }
+        public DateTime StartDate { get; set; }
         [BsonDateTimeOptions(Kind = DateTimeKind.Local, DateOnly = true)]
-        public DateTime PlacementEndDate { get; set; }
+        public DateTime EndDate { get; set; }
         public PlacementTypes PlacementType { get; set; } 
     }
 }
