@@ -10,6 +10,7 @@ namespace Timesheets.Contracts
         Timesheet Get(string id);
         IEnumerable<Timesheet> GetAll();
         void Delete(string id);
-        void Create(Timesheet newTimesheet);
+        void Insert(Timesheet newTimesheet);
+        void InsertMany(IEnumerable<Timesheet> newTimesheets);
     }
 }

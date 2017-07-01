@@ -12,6 +12,6 @@ namespace Timesheets.Contracts
         Timesheet Get(string id);
         IEnumerable<Timesheet> GetAll();
         bool Delete(string id);
-        bool Create(Dtos.Timesheet newTimesheet);
+        bool Create(Dtos.NewTimesheetsRequest newTimesheet);
     }
 }

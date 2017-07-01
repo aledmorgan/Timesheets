@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IDateHelper.cs" />
     <Compile Include="ITimesheetClient.cs" />
     <Compile Include="ITimesheetRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

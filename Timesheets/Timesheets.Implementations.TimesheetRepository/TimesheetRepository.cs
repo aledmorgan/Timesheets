@@ -22,11 +22,23 @@ namespace Timesheets.Implementations.TimesheetRepository
             _collection = db.GetCollection<Timesheet>(_collectionsName);
         }
 
-        public void Create(Timesheet newTimesheet)
+        public void Insert(Timesheet newTimesheet)
         {
             try
             {
                 _collection.InsertOne(newTimesheet);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void InsertMany(IEnumerable<Timesheet> newTimesheets)
+        {
+            try
+            {
+                _collection.InsertMany(newTimesheets);
             }
             catch (Exception)
             {

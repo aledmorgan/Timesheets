@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Timesheets.Contracts;
+using Timesheets.Implementations.DateHelper;
 using Timesheets.Implementations.TimesheetClient;
 using Timesheets.Implementations.TimesheetRepository;
 
@@ -16,6 +17,7 @@ namespace Timesheets.Ioc
         {
             builder.RegisterType<TimesheetRepository>().As<ITimesheetRepository>().SingleInstance();
             builder.RegisterType<TimesheetClient>().As<ITimesheetClient>().SingleInstance();
+            builder.RegisterType<DateHelper>().As<IDateHelper>().SingleInstance();
         }
     }
 }

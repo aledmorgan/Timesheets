@@ -17,9 +17,9 @@ namespace Timesheets.Controllers
             _timesheetRepositoryClient = timesheetRepositoryClient;
         }
 
-        public JsonResult CreateTimesheet(Timesheet newTimesheet)
+        public JsonResult CreateTimesheet(NewTimesheetsRequest newTimesheets)
         {
-            return Json(_timesheetRepositoryClient.Create(newTimesheet));
+            return Json(_timesheetRepositoryClient.Create(newTimesheets));
         }
 
         public JsonResult DeleteTimesheet(string id)

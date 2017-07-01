@@ -9,19 +9,11 @@ angular.module('timesheetsApp.controllers', [])
         $scope.createSuccess = false;
         $scope.updateSuccess = false;
 
-        $scope.createError = false;
-        $scope.updateError = false;
-
         $scope.loading = false;
 
         $scope.$on('$routeChangeSuccess', function () {
-            $scope.init();
-        });
-
-        $scope.init = function () {
-            //if I'm making create and edit on the same screen, keep this here for now
             $scope.setDefaults();
-        }
+        });
 
         $scope.setDefaults = function () {
             $scope.request.Id = '';

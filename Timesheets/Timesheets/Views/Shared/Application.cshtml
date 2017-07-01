@@ -14,6 +14,8 @@
     </div>
 </script>
 <script type="text/ng-template" id="application/create">
+    <span ng-show="createSuccess">Timesheets have been created</span>
+    <span ng-show="createError">There was an error whilst creating timesheets</span>
     <form name="form" novalidate>
         <div class="form-group">
             <label for="candidateName">Candidate Name:</label>
