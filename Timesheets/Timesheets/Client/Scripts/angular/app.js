@@ -6,7 +6,8 @@ angular.module('timesheetsApp',
         'timesheetsApp.services',
         'ngRoute'
     ]
-).config(['$routeProvider', function ($routeProvider) {
+).config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+    $locationProvider.hashPrefix('');
     $routeProvider
         .when('/timesheets', {
             templateUrl: 'application/index',

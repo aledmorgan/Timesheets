@@ -14,10 +14,20 @@ namespace Timesheets
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                name: "Service",
+                url: "ServiceController/{action}",
+                defaults: new { controller = "Service", action = "{action}" }
             );
+
+            routes.MapRoute(
+                name: "Default",
+                url: "",
+                defaults: new { controller = "Layout", action = "Index", id = UrlParameter.Optional }
+            );
+
+            
+
+            
         }
     }
 }

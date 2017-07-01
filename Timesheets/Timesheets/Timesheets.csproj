@@ -156,7 +156,6 @@
     <Content Include="Scripts\angular-touch.js" />
     <Content Include="Scripts\angular-touch.min.js" />
     <Content Include="Scripts\angular.js" />
-    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
@@ -933,7 +932,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Layout\Index.cshtml" />
-    <Content Include="Views\Partial\Application.cshtml" />
+    <Content Include="Views\Shared\Application.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -946,6 +945,7 @@
     <Folder Include="Client\Images\" />
     <Folder Include="Client\Styles\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Partial\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Timesheets.Contracts\Timesheets.Contracts.csproj">

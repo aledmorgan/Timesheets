@@ -54,6 +54,10 @@
       <Project>{5c2d953d-bd32-4391-92ff-b2bf72c5c2bb}</Project>
       <Name>Timesheets.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Timesheets.Implementations.TimesheetClient\Timesheets.Implementations.TimesheetClient.csproj">
+      <Project>{f0b6dd7b-2de1-4fd4-989d-f23608cf5408}</Project>
+      <Name>Timesheets.Implementations.TimesheetClient</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Timesheets.Implementations.TimesheetRepository\Timesheets.Implementations.TimesheetRepository.csproj">
       <Project>{22145894-7db6-448c-830e-5638a65f3390}</Project>
       <Name>Timesheets.Implementations.TimesheetRepository</Name>

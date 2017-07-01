@@ -17,7 +17,7 @@ namespace Timesheets.App_Start
 
             bundles.Add(new StyleBundle("~/bundles/styles")
                 .IncludeDirectory("~/Content", "*.css", searchSubdirectories: true)
-                .IncludeDirectory("~/Client/Stylesheets", "*.css", searchSubdirectories: true));
+                .IncludeDirectory("~/Client/Styles", "*.css", searchSubdirectories: true));
         }
     }
 }
