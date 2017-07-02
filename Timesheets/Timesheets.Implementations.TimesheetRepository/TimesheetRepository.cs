@@ -13,7 +13,7 @@ namespace Timesheets.Implementations.TimesheetRepository
     public class TimesheetRepository : ITimesheetRepository
     {
         private IMongoCollection<Timesheet> _collection;
-        private const string _databaseName = "timesheetsDb";
+        private const string _databaseName = "timesheets";
         private const string _collectionsName = "timesheets";
 
         public TimesheetRepository()

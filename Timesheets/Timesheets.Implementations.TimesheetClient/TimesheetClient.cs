@@ -26,6 +26,7 @@ namespace Timesheets.Implementations.TimesheetClient
         public bool Create(Dtos.NewTimesheetsRequest newTimesheet)
         {
             var timesheets = GenerateTimesheetRequests(newTimesheet);
+
             _timesheetRepository.InsertMany(timesheets);
 
             return true;
@@ -93,10 +94,12 @@ namespace Timesheets.Implementations.TimesheetClient
                     datebandEnd = end;
                 }
 
+                var universalStart = new DateTime(datebandStart.Year, datebandStart.Month, datebandStart.Day, 0, 0, 0, DateTimeKind.Utc);
+                var universalEnd = new DateTime(datebandEnd.Year, datebandEnd.Month, datebandEnd.Day, 0, 0, 0, DateTimeKind.Utc);
                 datebands.Add(new Range<DateTime>()
                 {
-                    Start = datebandStart,
-                    End = datebandEnd
+                    Start = universalStart,
+                    End = universalEnd
                 });
             }
 
@@ -113,7 +116,7 @@ namespace Timesheets.Implementations.TimesheetClient
             while(start <= end)
             {
                 var datebandStart = start;
-                DateTime datebandEnd = DateTime.Now;
+                DateTime datebandEnd = DateTime.Today;
 
                 if (!startReset)
                 {
@@ -133,10 +136,12 @@ namespace Timesheets.Implementations.TimesheetClient
                     datebandEnd = end;
                 }
 
+                var universalStart = new DateTime(datebandStart.Year, datebandStart.Month, datebandStart.Day, 0, 0, 0, DateTimeKind.Utc);
+                var universalEnd = new DateTime(datebandEnd.Year, datebandEnd.Month, datebandEnd.Day, 0, 0, 0, DateTimeKind.Utc);
                 datebands.Add(new Range<DateTime>()
                 {
-                    Start = datebandStart,
-                    End = datebandEnd
+                    Start = universalStart,
+                    End = universalEnd
                 });
             }
 
@@ -149,6 +154,8 @@ namespace Timesheets.Implementations.TimesheetClient
 
             foreach (var dateband in datebands)
             {
+                var start = dateband.Start;
+
                 timesheets.Add(new Dtos.Timesheet()
                 {
                     CandidateName = request.CandidateName,
@@ -172,7 +179,10 @@ namespace Timesheets.Implementations.TimesheetClient
 
         public IEnumerable<Timesheet> Search(Dtos.SearchRequest request)
         {
-            if(request.From == null || request.To == DateTime.MinValue)
+            request.From = DateTime.SpecifyKind(request.From, DateTimeKind.Utc);
+            request.To = DateTime.SpecifyKind(request.To, DateTimeKind.Utc);
+
+            if (request.From == null || request.To == DateTime.MinValue)
             {
                 request.From = new DateTime(1990,01,01);
             }
