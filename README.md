@@ -6,3 +6,4 @@ The solution uses MongoDB for persistence and the following code libraries:
 - momentJs
 - angularJs
 - Bootstrap
+- Optimization for bundling scripts/css
