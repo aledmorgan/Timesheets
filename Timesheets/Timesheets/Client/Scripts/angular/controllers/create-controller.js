@@ -25,13 +25,29 @@ angular.module('timesheetsApp.controllers', [])
             $scope.request.PlacementType = '';
         }
 
+        $scope.getMappedControllerRequest = function () {
+            var request = {
+                Id: $scope.request.Id,
+                CandidateName: $scope.request.CandidateName,
+                ClientName: $scope.request.ClientName,
+                JobTitle: $scope.request.JobTitle,
+                PlacementStartDate: ukFormattedMoment($scope.request.PlacementStartDate),
+                PlacementEndDate: ukFormattedMoment($scope.request.PlacementEndDate),
+                PlacementType: $scope.request.PlacementType
+            };
+
+            return request;
+        }
+
         $scope.submit = function (valid) {
             if (valid) {
                 $scope.loading = true;
                 $scope.createSuccess = false;
                 $scope.createError = false;
 
-                var request = timesheetService.createTimesheet($scope.request);
+                var requestObject = $scope.getMappedControllerRequest();
+
+                var request = timesheetService.createTimesheet(requestObject);
                 request.then(function (response) {
                     $scope.createSuccess = true;
                 }).catch(function (response) {
