@@ -35,8 +35,8 @@
                     <button class="btn btn-default" ng-click="search(form.$valid)">Search</button>
                 </div>
                 <div class="col-md-3">
-                    <button class="btn btn-default" onclick="window.print();">Print Visible</button>
-                    <button class="btn btn-default" ng-click="deleteTimesheets()">Delete Visible</button>
+                    <button class="btn btn-default" onclick="window.print();" ng-disabled="timesheets.length === 0">Print Visible</button>
+                    <button class="btn btn-default" ng-click="deleteTimesheets()" ng-disabled="timesheets.length === 0">Delete Visible</button>
                 </div>
             </div>
         </form>
