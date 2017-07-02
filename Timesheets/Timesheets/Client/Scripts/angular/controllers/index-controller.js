@@ -29,6 +29,7 @@ angular.module('timesheetsApp.controllers')
 
         $scope.search = function (valid) {
             if (valid) {
+                $scope.resetStatusFlags();
                 $scope.loading = true;
 
                 var requestObject = { CandidateName: $scope.candidateName, ClientName: $scope.clientName, From: ukFormattedMoment($scope.dateFrom), To: ukFormattedMoment($scope.dateTo) };
@@ -56,7 +57,7 @@ angular.module('timesheetsApp.controllers')
 
                 var request = timesheetService.deleteTimesheets(ids);
                 request.then(function (response) {
-                    $scope.loadTimesheets();
+                    $scope.timesheets = [];
                     $scope.deleteSuccess = true;
                 }).catch(function (response) {
                     $scope.deleteError = true;

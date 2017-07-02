@@ -119,6 +119,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Client\Images\spin.gif" />
     <Content Include="Client\Scripts\angular\app.js" />
     <Content Include="Client\Scripts\angular\controllers\create-controller.js" />
     <Content Include="Client\Scripts\angular\controllers\index-controller.js" />
@@ -949,7 +950,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Client\Images\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Partial\" />
   </ItemGroup>

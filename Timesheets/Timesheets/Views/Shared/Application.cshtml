@@ -1,6 +1,12 @@
 ﻿<div ng-view autoscroll="true"></div>
 
 <script type="text/ng-template" id="application/index">
+    <div ng-show="deleteSuccess" class="alert alert-success">
+        The timesheets were successfully deleted.
+    </div>
+    <div ng-show="deleteError" class="alert alert-danger">
+        There was an error whilst deleting the timesheets.
+    </div>
     <div class="panel search-panel">
         <h3>Search</h3>
         <form name="form">
@@ -34,16 +40,9 @@
 
     </div>
     <div ng-show="loading">
-        Loading...
+        <img src="/Client/Images/spin.gif" width="30"/> Loading...
     </div>
     <div ng-show="!loading">
-        <div ng-show="deleteSuccess" class="alert alert-success">
-            The timesheets were successfully deleted.
-        </div>
-        <div ng-show="deleteError" class="alert alert-danger">
-            There was an error whilst deleting the timesheets.
-        </div>
-        
         <div class="result" ng-show="timesheets.length > 0"><p><strong>{{timesheets.length}} timesheets found</strong></p></div>
         <div ng-repeat="timesheet in timesheets" class="panel timesheet">
             <table class="table table-bordered">
@@ -135,7 +134,12 @@
                 </select>
                 <span class="error" ng-show="(form.$submitted || form.placementType.$touched) && form.placementType.$error.required">This is a required field</span>
             </div>
-            <button type="submit" class="btn btn-default" ng-click="submit(form.$valid)">Generate Timesheets</button>
+            <div ng-show="loading">
+                <img src="/Client/Images/spin.gif" width="30"/> Generating timesheets...
+            </div>
+            <div ng-show="!loading">
+                <button type="submit" class="btn btn-default" ng-click="submit(form.$valid)">Generate Timesheets</button>
+            </div>
         </form>
     </div>
     
