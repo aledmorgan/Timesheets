@@ -7,3 +7,5 @@ The solution uses MongoDB for persistence and the following code libraries:
 - angularJs
 - Bootstrap
 - Optimization for bundling scripts/css
+
+UI tested in Chrome
