@@ -5,6 +5,9 @@ angular.module('timesheetsApp.controllers')
         $scope.timesheets = [];
         $scope.loading = false;
         $scope.error = false;
+        $scope.searched = false;
+        $scope.deleteSuccess = false;
+        $scope.deleteError = false;
 
         $scope.candidateName = '';
         $scope.clientName = '';
@@ -21,6 +24,7 @@ angular.module('timesheetsApp.controllers')
         $scope.resetStatusFlags = function () {
             $scope.deleteSuccess = false;
             $scope.deleteError = false;
+            $scope.error = false;
         }
 
         $scope.getFormattedDate = function (date) {
@@ -36,6 +40,7 @@ angular.module('timesheetsApp.controllers')
                 var request = timesheetService.searchTimesheets(requestObject);
                 request.then(function (response) {
                     $scope.timesheets = response.data;
+                    $scope.searched = true;
                 }).catch(function (response) {
                     $scope.error = true;
                 }).finally(function () {

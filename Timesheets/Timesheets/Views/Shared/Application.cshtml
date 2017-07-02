@@ -7,6 +7,9 @@
     <div ng-show="deleteError" class="alert alert-danger">
         There was an error whilst deleting the timesheets.
     </div>
+    <div ng-show="error" class="alert alert-danger">
+        There was an error whilst searching for timesheets.
+    </div>
     <div class="panel search-panel">
         <h3>Search</h3>
         <form name="form">
@@ -86,8 +89,11 @@
                 </tr>
             </table>
         </div>
-        <div ng-if="timesheets.length === 0">
+        <div ng-if="timesheets.length === 0 && !searched">
             Use the filters above to show results.
+        </div>
+        <div ng-if="timesheets.length === 0 && searched">
+            No results were found.
         </div>
     </div>
 </script>
