@@ -27,15 +27,15 @@
             </div>
             <div class="row button-row">
                 <div class="col-md-2">
-                    <button class="btn btn-default">Print Visible</button>
+                    <button class="btn btn-default" onclick="window.print();">Print Visible</button>
                 </div>
                 <div class="col-md-2">
                     <button class="btn btn-default">Delete Visible</button>
                 </div>
             </div>
         </div>
-        <div ng-show="filteredTimesheets.length > 0"><p><strong>{{filteredTimesheets.length}} timesheets found</strong></p></div>
-        <div ng-repeat="timesheet in filteredTimesheets" class="panel">
+        <div class="result" ng-show="filteredTimesheets.length > 0"><p><strong>{{filteredTimesheets.length}} timesheets found</strong></p></div>
+        <div ng-repeat="timesheet in filteredTimesheets" class="panel timesheet">
             <table class="table table-bordered">
                 <tr>
                     <th scope="row">
@@ -73,7 +73,7 @@
                     <th colspan="2">Notes</th>
                 </tr>
                 <tr>
-                    <td height="100" colspan="2"></td>
+                    <td height="100" class="notes" colspan="2"></td>
                 </tr>
             </table>
         </div>

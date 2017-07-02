@@ -82,3 +82,21 @@ h3{
 .search-panel .button-row{
     margin-top:10px;
 }
+
+@media print{
+    header, .navbar-wrapper, .search-panel, .result{
+        display:none;
+    }
+    body, html{
+        height:100%;
+        width:100%;
+    }
+    .timesheet {
+        width: 100%;
+        height: 100%;
+        page-break-inside: avoid;
+    }
+    .timesheet .notes{
+        height:500px!important;
+    }
+}
