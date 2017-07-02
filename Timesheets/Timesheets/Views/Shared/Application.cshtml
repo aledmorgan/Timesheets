@@ -5,6 +5,12 @@
         Loading...
     </div>
     <div ng-show="!loading">
+        <div ng-show="deleteSuccess" class="alert alert-success">
+            The timesheets were successfully deleted.
+        </div>
+        <div ng-show="deleteError" class="alert alert-danger">
+            There was an error whilst deleting the timesheets.
+        </div>
         <div class="panel search-panel">
             <h3>Search</h3>
             <div class="row">
@@ -30,7 +36,7 @@
                     <button class="btn btn-default" onclick="window.print();">Print Visible</button>
                 </div>
                 <div class="col-md-2">
-                    <button class="btn btn-default">Delete Visible</button>
+                    <button class="btn btn-default" ng-click="deleteTimesheets()">Delete Visible</button>
                 </div>
             </div>
         </div>

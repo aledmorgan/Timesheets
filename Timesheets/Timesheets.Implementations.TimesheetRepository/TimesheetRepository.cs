@@ -83,5 +83,18 @@ namespace Timesheets.Implementations.TimesheetRepository
                 throw;
             }
         }
+
+        public void DeleteMany(IEnumerable<string> ids)
+        {
+            try
+            {
+                var filter = Builders<Timesheet>.Filter.In("Id", ids);
+                _collection.DeleteMany(filter);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

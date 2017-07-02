@@ -22,9 +22,9 @@ namespace Timesheets.Controllers
             return Json(_timesheetRepositoryClient.Create(newTimesheets));
         }
 
-        public JsonResult DeleteTimesheet(string id)
+        public JsonResult DeleteTimesheets(IEnumerable<string> ids)
         {
-            return Json(_timesheetRepositoryClient.Delete(id));
+            return Json(_timesheetRepositoryClient.DeleteTimesheets(ids));
         }
 
         public JsonResult GetTimesheet(string id)

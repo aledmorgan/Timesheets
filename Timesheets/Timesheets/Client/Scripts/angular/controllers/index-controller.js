@@ -24,6 +24,11 @@ angular.module('timesheetsApp.controllers')
             $scope.loadTimesheets();
         }
 
+        $scope.resetStatusFlags = function () {
+            $scope.deleteSuccess = false;
+            $scope.deleteError = false;
+        }
+
         $scope.getFormattedDate = function (date) {
             return moment(date).format("DD/MM/YYYY");
         }
@@ -32,6 +37,7 @@ angular.module('timesheetsApp.controllers')
             var request = timesheetService.getTimesheets();
             request.then(function (response) {
                 $scope.timesheets = response.data;
+                $scope.filteredTimesheets = [];
             }).catch(function (response) {
                 $scope.error = true;
             }).finally(function () {
@@ -41,6 +47,8 @@ angular.module('timesheetsApp.controllers')
 
         //We need to do date comparisons, so it's better to filter in a function than inline html with ng filters
         $scope.filterTimesheets = function () {
+            $scope.resetStatusFlags();
+
             $scope.filteredTimesheets = [];
 
             $scope.timesheets.forEach(function (timesheet) {
@@ -54,5 +62,29 @@ angular.module('timesheetsApp.controllers')
                     }
                 }
             });
+        }
+
+        $scope.deleteTimesheets = function () {
+            $scope.resetStatusFlags();
+            var answer = confirm('Are you sure you want to delete these timesheets?');
+
+            if (answer) {
+                var ids = [];
+
+                $scope.filteredTimesheets.forEach(function (timesheet) {
+                    ids.push(timesheet.Id);
+                });
+
+                var request = timesheetService.deleteTimesheets(ids);
+                request.then(function (response) {
+                    $scope.loadTimesheets();
+                    $scope.deleteSuccess = true;
+                }).catch(function (response) {
+                    $scope.deleteError = true;
+                }).finally(function (response) {
+
+                })
+            }
+            
         }
     }]);

@@ -28,6 +28,18 @@ angular.module('timesheetsApp.services', [])
                         console.log('Error creating timesheet');
                     }
                     );
+            },
+
+            deleteTimesheets: function (ids) {
+                return $http.post(
+                    '/ServiceController/DeleteTimesheets',
+                    { ids: ids }
+                ).then(function(response){
+                    return response;
+                    }, function (response) {
+                        console.log(response)
+                        console.log('Error deleting timesheets')
+                    })
             }
         }
     }]);

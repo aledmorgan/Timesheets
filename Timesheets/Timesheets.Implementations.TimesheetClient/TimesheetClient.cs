@@ -161,5 +161,11 @@ namespace Timesheets.Implementations.TimesheetClient
 
             return timesheets;
         }
+
+        public bool DeleteTimesheets(IEnumerable<string> ids)
+        {
+            _timesheetRepository.DeleteMany(ids);
+            return true;
+        }
     }
 }
