@@ -88,45 +88,50 @@
 <script type="text/ng-template" id="application/create">
     <span ng-show="createSuccess">Timesheets have been created</span>
     <span ng-show="createError">There was an error whilst creating timesheets</span>
-    <form name="form" novalidate>
-        <div class="form-group">
-            <label for="candidateName">Candidate Name:</label>
-            <input type="text" class="form-control" ng-model="request.CandidateName" name="candidateName" required>
-            <span class="error" ng-show="(form.$submitted || form.candidateName.$touched) && form.candidateName.$error.required">This is a required field</span>
-        </div>
-        <div class="form-group">
-            <label for="clientName">Client Name:</label>
-            <input type="text" class="form-control" ng-model="request.ClientName" name="clientName" required>
-            <span class="error" ng-show="(form.$submitted || form.clientName.$touched) && form.clientName.$error.required">This is a required field</span>
-        </div>
-        <div class="form-group">
-            <label for="jobTitle">Job Title:</label>
-            <input type="text" class="form-control" ng-model="request.JobTitle" name="jobTitle" required>
-            <span class="error" ng-show="(form.$submitted || form.jobTitle.$touched) && form.jobTitle.$error.required">This is a required field</span>
-        </div>
-        <div class="form-group">
-            <label for="placementStart">Placement Start Date (dd/mm/yyyy):</label>
-            <input type="text" class="form-control" ng-model="request.PlacementStartDate" name="placementStart" moment-valid-date required>
-            <span class="error" ng-show="(form.$submitted || form.placementStart.$touched) && form.placementStart.$error.required">This is a required field</span>
-            <span class="error" ng-show="(form.$submitted || form.placementStart.$touched) && form.placementStart.$error.momentValidDate">Please enter a valid date</span>
-        </div>
-        <div class="form-group">
-            <label for="placementEnd">Placement End Date (dd/mm/yyyy):</label>
-            <input type="text" class="form-control" ng-model="request.PlacementEndDate" name="placementEnd" moment-valid-date required>
-            <span class="error" ng-show="(form.$submitted || form.placementEnd.$touched) && form.placementEnd.$error.required">This is a required field</span>
-            <span class="error" ng-show="(form.$submitted || form.placementEnd.$touched) && form.placementEnd.$error.momentValidDate">Please enter a valid date</span>
-        </div>
-        <div class="form-group">
-            <label for="placementType">Placement Type</label>
-            <select class="form-control" ng-model="request.PlacementType" name="placementType" required>
-                <option value="">- Please Select -</option>
-                <option value="1">Weekly</option>
-                <option value="2">Monthly</option>
-            </select>
-            <span class="error" ng-show="(form.$submitted || form.placementType.$touched) && form.placementType.$error.required">This is a required field</span>
-        </div>
-        <button type="submit" ng-click="submit(form.$valid)">Generate Timesheets</button>
-    </form>
+    <div class="panel">
+        <h3>Generate Timesheets</h3>
+
+        <form name="form" novalidate>
+            <div class="form-group">
+                <label for="candidateName">Candidate Name:</label>
+                <input type="text" class="form-control" ng-model="request.CandidateName" name="candidateName" required>
+                <span class="error" ng-show="(form.$submitted || form.candidateName.$touched) && form.candidateName.$error.required">This is a required field</span>
+            </div>
+            <div class="form-group">
+                <label for="clientName">Client Name:</label>
+                <input type="text" class="form-control" ng-model="request.ClientName" name="clientName" required>
+                <span class="error" ng-show="(form.$submitted || form.clientName.$touched) && form.clientName.$error.required">This is a required field</span>
+            </div>
+            <div class="form-group">
+                <label for="jobTitle">Job Title:</label>
+                <input type="text" class="form-control" ng-model="request.JobTitle" name="jobTitle" required>
+                <span class="error" ng-show="(form.$submitted || form.jobTitle.$touched) && form.jobTitle.$error.required">This is a required field</span>
+            </div>
+            <div class="form-group">
+                <label for="placementStart">Placement Start Date (dd/mm/yyyy):</label>
+                <input type="text" class="form-control" ng-model="request.PlacementStartDate" name="placementStart" moment-valid-date required>
+                <span class="error" ng-show="(form.$submitted || form.placementStart.$touched) && form.placementStart.$error.required">This is a required field</span>
+                <span class="error" ng-show="(form.$submitted || form.placementStart.$touched) && form.placementStart.$error.momentValidDate">Please enter a valid date</span>
+            </div>
+            <div class="form-group">
+                <label for="placementEnd">Placement End Date (dd/mm/yyyy):</label>
+                <input type="text" class="form-control" ng-model="request.PlacementEndDate" name="placementEnd" moment-valid-date required>
+                <span class="error" ng-show="(form.$submitted || form.placementEnd.$touched) && form.placementEnd.$error.required">This is a required field</span>
+                <span class="error" ng-show="(form.$submitted || form.placementEnd.$touched) && form.placementEnd.$error.momentValidDate">Please enter a valid date</span>
+            </div>
+            <div class="form-group">
+                <label for="placementType">Placement Type</label>
+                <select class="form-control" ng-model="request.PlacementType" name="placementType" required>
+                    <option value="">- Please Select -</option>
+                    <option value="1">Weekly</option>
+                    <option value="2">Monthly</option>
+                </select>
+                <span class="error" ng-show="(form.$submitted || form.placementType.$touched) && form.placementType.$error.required">This is a required field</span>
+            </div>
+            <button type="submit" class="btn btn-default" ng-click="submit(form.$valid)">Generate Timesheets</button>
+        </form>
+    </div>
+    
 </script>
 <script type="text/ng-template" id="application/timesheet">
 
