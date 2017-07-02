@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="NewTimesheetsRequest.cs" />
     <Compile Include="PlacementTypes.cs" />
+    <Compile Include="SearchRequest.cs" />
     <Compile Include="Timesheet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,6 +1,38 @@
 ﻿<div ng-view autoscroll="true"></div>
 
 <script type="text/ng-template" id="application/index">
+    <div class="panel search-panel">
+        <h3>Search</h3>
+        <form name="form">
+            <div class="row">
+                <div class="col-md-12 col-lg-3">
+                    <label for="candidateName">Candidate Name:</label> <input type="text" class="form-control" ng-model="candidateName" name="candidateName" />
+                </div>
+                <div class="col-md-12 col-lg-3">
+                    <label for="clientName">Client Name:</label> <input type="text" class="form-control" ng-model="clientName" name="clientName" />
+                </div>
+                <div class="col-md-12 col-lg-3">
+                    <label for="fromDate">From Date (DD/MM/YYYY):</label> <input type="text" class="form-control" ng-model="dateFrom" moment-valid-date name="fromDate" />
+                    <span class="error" ng-show="form.fromDate.$touched && form.fromDate.$error.momentValidDate">Please enter a valid date</span>
+                </div>
+                <div class="col-md-12 col-lg-3">
+                    <label for="toDate">To Date (DD/MM/YYYY):</label><input type="text" class="form-control" ng-model="dateTo" moment-valid-date name="toDate" />
+                    <span class="error" ng-show="form.toDate.$touched && form.toDate.$error.momentValidDate">Please enter a valid date</span>
+                </div>
+            </div>
+
+            <div class="row button-row">
+                <div class="col-md-9">
+                    <button class="btn btn-default" ng-click="search(form.$valid)">Search</button>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-default" onclick="window.print();">Print Visible</button>
+                    <button class="btn btn-default" ng-click="deleteTimesheets()">Delete Visible</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
     <div ng-show="loading">
         Loading...
     </div>
@@ -11,37 +43,9 @@
         <div ng-show="deleteError" class="alert alert-danger">
             There was an error whilst deleting the timesheets.
         </div>
-        <div class="panel search-panel">
-            <h3>Search</h3>
-            <div class="row">
-                <form name="form">
-                    <div class="col-md-12 col-lg-3">
-                        <label for="candidateName">Candidate Name:</label> <input type="text" class="form-control" ng-model="candidateName" name="candidateName" />
-                    </div>
-                    <div class="col-md-12 col-lg-3">
-                        <label for="clientName">Client Name:</label> <input type="text" class="form-control" ng-model="clientName" name="clientName" />
-                    </div>
-                    <div class="col-md-12 col-lg-3">
-                        <label for="fromDate">From Date (DD/MM/YYYY):</label> <input type="text" class="form-control" ng-model="dateFrom" moment-valid-date name="fromDate" />
-                        <span class="error" ng-show="form.fromDate.$touched && form.fromDate.$error.momentValidDate">Please enter a valid date</span>
-                    </div>
-                    <div class="col-md-12 col-lg-3">
-                        <label for="toDate">To Date (DD/MM/YYYY):</label><input type="text" class="form-control" ng-model="dateTo" moment-valid-date name="toDate" />
-                        <span class="error" ng-show="form.toDate.$touched && form.toDate.$error.momentValidDate">Please enter a valid date</span>
-                    </div>
-                </form>
-            </div>
-            <div class="row button-row">
-                <div class="col-md-2">
-                    <button class="btn btn-default" onclick="window.print();">Print Visible</button>
-                </div>
-                <div class="col-md-2">
-                    <button class="btn btn-default" ng-click="deleteTimesheets()">Delete Visible</button>
-                </div>
-            </div>
-        </div>
-        <div class="result" ng-show="filteredTimesheets.length > 0"><p><strong>{{filteredTimesheets.length}} timesheets found</strong></p></div>
-        <div ng-repeat="timesheet in filteredTimesheets" class="panel timesheet">
+        
+        <div class="result" ng-show="timesheets.length > 0"><p><strong>{{timesheets.length}} timesheets found</strong></p></div>
+        <div ng-repeat="timesheet in timesheets" class="panel timesheet">
             <table class="table table-bordered">
                 <tr>
                     <th scope="row">
@@ -84,9 +88,6 @@
             </table>
         </div>
         <div ng-if="timesheets.length === 0">
-            No timesheets are available. Click <a href="/#/create">here</a> to generate timesheets.
-        </div>
-        <div ng-if="timesheets.length > 0 && filteredTimesheets.length === 0">
             Use the filters above to show results.
         </div>
     </div>

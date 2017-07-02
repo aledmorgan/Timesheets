@@ -167,5 +167,30 @@ namespace Timesheets.Implementations.TimesheetClient
             _timesheetRepository.DeleteMany(ids);
             return true;
         }
+
+        public IEnumerable<Timesheet> Search(Dtos.SearchRequest request)
+        {
+            if(request.From == null || request.To == DateTime.MinValue)
+            {
+                request.From = new DateTime(1990,01,01);
+            }
+
+            if(request.To == null || request.To == DateTime.MinValue)
+            {
+                request.To = new DateTime(2100,01,01);
+            }
+
+            if(request.CandidateName == null)
+            {
+                request.CandidateName = string.Empty;
+            }
+
+            if(request.ClientName == null)
+            {
+                request.ClientName = string.Empty;
+            }
+
+            return _mapper.Map<IEnumerable<Timesheet>>(_timesheetRepository.Search(request));
+        }
     }
 }

@@ -36,5 +36,10 @@ namespace Timesheets.Controllers
         {
             return Json(_timesheetRepositoryClient.GetAll());
         }
+
+        public JsonResult SearchTimesheets(SearchRequest request)
+        {
+            return Json(_timesheetRepositoryClient.Search(request));
+        }
     }
 }

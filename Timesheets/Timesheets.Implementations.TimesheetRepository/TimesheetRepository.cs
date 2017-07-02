@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -90,6 +91,25 @@ namespace Timesheets.Implementations.TimesheetRepository
             {
                 var filter = Builders<Timesheet>.Filter.In("Id", ids);
                 _collection.DeleteMany(filter);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public IEnumerable<Timesheet> Search(SearchRequest request)
+        {
+            try
+            {
+                var filter = Builders<Timesheet>.Filter.And(
+                    Builders<Timesheet>.Filter.Where(x => x.CandidateName.ToLower().Contains(request.CandidateName.ToLower())),
+                    Builders<Timesheet>.Filter.Where(x => x.ClientName.ToLower().Contains(request.ClientName.ToLower())),
+                    Builders<Timesheet>.Filter.Gte(new StringFieldDefinition<Timesheet, BsonDateTime>("StartDate"), new BsonDateTime(request.From)),
+                    Builders<Timesheet>.Filter.Lte(new StringFieldDefinition<Timesheet, BsonDateTime>("EndDate"), new BsonDateTime(request.To))
+                    );
+
+                return _collection.Find(filter).ToList();
             }
             catch (Exception)
             {

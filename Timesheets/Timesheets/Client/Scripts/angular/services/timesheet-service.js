@@ -40,6 +40,18 @@ angular.module('timesheetsApp.services', [])
                         console.log(response)
                         console.log('Error deleting timesheets')
                     })
+            },
+
+            searchTimesheets: function (request) {
+                return $http.post(
+                    '/ServiceController/SearchTimesheets',
+                    { request: request }
+                ).then(function (response) {
+                    return response;
+                }, function (response) {
+                    console.log(response)
+                    console.log('Error searching timesheets')
+                })
             }
         }
     }]);

@@ -3,8 +3,7 @@
 angular.module('timesheetsApp.controllers')
     .controller('IndexController', ['$scope', 'timesheetService', function ($scope, timesheetService) {
         $scope.timesheets = [];
-        $scope.filteredTimesheets = [];
-        $scope.loading = true;
+        $scope.loading = false;
         $scope.error = false;
 
         $scope.candidateName = '';
@@ -16,12 +15,7 @@ angular.module('timesheetsApp.controllers')
             $scope.init();
         });
 
-        $scope.$watchCollection('[candidateName, clientName, dateFrom, dateTo]', function () {
-            $scope.filterTimesheets();
-        });
-
         $scope.init = function () {
-            $scope.loadTimesheets();
         }
 
         $scope.resetStatusFlags = function () {
@@ -33,35 +27,20 @@ angular.module('timesheetsApp.controllers')
             return moment(date).format("DD/MM/YYYY");
         }
 
-        $scope.loadTimesheets = function () {
-            var request = timesheetService.getTimesheets();
-            request.then(function (response) {
-                $scope.timesheets = response.data;
-                $scope.filteredTimesheets = [];
-            }).catch(function (response) {
-                $scope.error = true;
-            }).finally(function () {
-                $scope.loading = false;
-            });
-        }
+        $scope.search = function (valid) {
+            if (valid) {
+                $scope.loading = true;
 
-        //We need to do date comparisons, so it's better to filter in a function than inline html with ng filters
-        $scope.filterTimesheets = function () {
-            $scope.resetStatusFlags();
-
-            $scope.filteredTimesheets = [];
-
-            $scope.timesheets.forEach(function (timesheet) {
-                if ($scope.candidateName === '' || timesheet.CandidateName.toLowerCase().indexOf($scope.candidateName) >= 0) {
-                    if ($scope.clientName === '' || timesheet.ClientName.toLowerCase().indexOf($scope.clientName) >= 0) {
-                        if ($scope.dateFrom === '' || moment(timesheet.StartDate) >= ukFormattedMoment($scope.dateFrom)) {
-                            if ($scope.dateTo === '' || moment(timesheet.EndDate) <= ukFormattedMoment($scope.dateTo)) {
-                                $scope.filteredTimesheets.push(timesheet);
-                            }
-                        }
-                    }
-                }
-            });
+                var requestObject = { CandidateName: $scope.candidateName, ClientName: $scope.clientName, From: ukFormattedMoment($scope.dateFrom), To: ukFormattedMoment($scope.dateTo) };
+                var request = timesheetService.searchTimesheets(requestObject);
+                request.then(function (response) {
+                    $scope.timesheets = response.data;
+                }).catch(function (response) {
+                    $scope.error = true;
+                }).finally(function () {
+                    $scope.loading = false;
+                });
+            }
         }
 
         $scope.deleteTimesheets = function () {
@@ -71,7 +50,7 @@ angular.module('timesheetsApp.controllers')
             if (answer) {
                 var ids = [];
 
-                $scope.filteredTimesheets.forEach(function (timesheet) {
+                $scope.timesheets.forEach(function (timesheet) {
                     ids.push(timesheet.Id);
                 });
 
@@ -83,8 +62,7 @@ angular.module('timesheetsApp.controllers')
                     $scope.deleteError = true;
                 }).finally(function (response) {
 
-                })
+                });
             }
-            
         }
     }]);

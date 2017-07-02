@@ -11,6 +11,7 @@ namespace Timesheets.Contracts
     {
         Timesheet Get(string id);
         IEnumerable<Timesheet> GetAll();
+        IEnumerable<Timesheet> Search(Dtos.SearchRequest request);
         bool Delete(string id);
         bool DeleteTimesheets(IEnumerable<string> ids);
         bool Create(Dtos.NewTimesheetsRequest newTimesheet);
