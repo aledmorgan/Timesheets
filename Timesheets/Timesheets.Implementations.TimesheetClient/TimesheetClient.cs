@@ -72,7 +72,7 @@ namespace Timesheets.Implementations.TimesheetClient
             var startReset = false;
             var datebands = new List<Range<DateTime>>();
 
-            while(start < end)
+            while(start <= end)
             {
                 var datebandStart = start;
 
@@ -110,7 +110,7 @@ namespace Timesheets.Implementations.TimesheetClient
             var datebands = new List<Range<DateTime>>();
             var startReset = false;
 
-            while(start < end)
+            while(start <= end)
             {
                 var datebandStart = start;
                 DateTime datebandEnd = DateTime.Now;
