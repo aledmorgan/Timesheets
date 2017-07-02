@@ -7,7 +7,8 @@ angular.module('timesheetsApp.controllers', [])
         $scope.request = {};
 
         $scope.createSuccess = false;
-        $scope.updateSuccess = false;
+        $scope.createError = false;
+        $scope.searchUrl = '';
 
         $scope.loading = false;
 
@@ -23,6 +24,21 @@ angular.module('timesheetsApp.controllers', [])
             $scope.request.PlacementStartDate = '';
             $scope.request.PlacementEndDate = '';
             $scope.request.PlacementType = '';
+        }
+
+        $scope.resetStatusFlags = function () {
+            $scope.createError = false;
+            $scope.createSuccess = false;
+        }
+
+        $scope.generateSearchUrl = function () {
+            var url = '/#/timesheets';
+            url += '?candidateName=' + $scope.request.CandidateName;
+            url += '&clientName=' + $scope.request.ClientName;
+            url += '&dateFrom=' + $scope.request.PlacementStartDate;
+            url += '&dateTo=' + $scope.request.PlacementEndDate;
+
+            return url;
         }
 
         $scope.getMappedControllerRequest = function () {
@@ -42,14 +58,14 @@ angular.module('timesheetsApp.controllers', [])
         $scope.submit = function (valid) {
             if (valid) {
                 $scope.loading = true;
-                $scope.createSuccess = false;
-                $scope.createError = false;
+                $scope.resetStatusFlags();
 
                 var requestObject = $scope.getMappedControllerRequest();
 
                 var request = timesheetService.createTimesheet(requestObject);
                 request.then(function (response) {
                     $scope.createSuccess = true;
+                    $scope.searchUrl = $scope.generateSearchUrl();
                 }).catch(function (response) {
                     $scope.createError = true;
                 }).finally(function () {

@@ -98,8 +98,12 @@
     </div>
 </script>
 <script type="text/ng-template" id="application/create">
-    <span ng-show="createSuccess">Timesheets have been created</span>
-    <span ng-show="createError">There was an error whilst creating timesheets</span>
+    <div ng-show="createSuccess" class="alert alert-success">
+        The timesheets were successfully created. Click <a ng-href="{{searchUrl}}">here</a> to view them.
+    </div>
+    <div ng-show="createError" class="alert alert-danger">
+        There was an error whilst creating the timesheets.
+    </div>
     <div class="panel">
         <h3>Generate Timesheets</h3>
 

@@ -1,7 +1,7 @@
 ﻿'use strict';
 
 angular.module('timesheetsApp.controllers')
-    .controller('IndexController', ['$scope', 'timesheetService', function ($scope, timesheetService) {
+    .controller('IndexController', ['$scope', '$location', 'timesheetService', function ($scope, $location, timesheetService) {
         $scope.timesheets = [];
         $scope.loading = false;
         $scope.error = false;
@@ -9,16 +9,19 @@ angular.module('timesheetsApp.controllers')
         $scope.deleteSuccess = false;
         $scope.deleteError = false;
 
-        $scope.candidateName = '';
-        $scope.clientName = '';
-        $scope.dateFrom = '';
-        $scope.dateTo = '';
+        $scope.candidateName = $location.search().candidateName;
+        $scope.clientName = $location.search().clientName;
+        $scope.dateFrom = $location.search().dateFrom;
+        $scope.dateTo = $location.search().dateTo;
 
         $scope.$on('$routeChangeSuccess', function () {
             $scope.init();
         });
 
         $scope.init = function () {
+            if ($scope.candidateName !== undefined || $scope.clientName !== undefined || $scope.dateFrom !== undefined || $scope.dateTo !== undefined) {
+                $scope.search(true);
+            }
         }
 
         $scope.resetStatusFlags = function () {
