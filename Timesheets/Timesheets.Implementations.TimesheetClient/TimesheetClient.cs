@@ -113,18 +113,20 @@ namespace Timesheets.Implementations.TimesheetClient
             while(start < end)
             {
                 var datebandStart = start;
+                DateTime datebandEnd = DateTime.Now;
 
                 if (!startReset)
                 {
                     var startOfWeek = _dateHelper.GetFirstDayOfWeek(start);
                     start = startOfWeek.AddDays(7);
+
+                    datebandEnd = start.AddDays(-1);
                 }
                 else
                 {
                     start = start.AddDays(7);
+                    datebandEnd = datebandStart.AddDays(6);
                 }
-
-                var datebandEnd = datebandStart.AddDays(6);
 
                 if(datebandEnd > end)
                 {
