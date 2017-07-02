@@ -10,8 +10,8 @@ namespace Timesheets.Models
         public string CandidateName { get; set; }
         public string ClientName { get; set; }
         public string JobTitle { get; set; }
-        public DateTime PlacementStartDate { get; set; }
-        public DateTime PlacementEndDate { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         public PlacementTypes PlacementType { get; set; } 
     }
 }

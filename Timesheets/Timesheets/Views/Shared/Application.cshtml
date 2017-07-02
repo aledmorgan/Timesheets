@@ -5,8 +5,76 @@
         Loading...
     </div>
     <div ng-show="!loading">
-        <div ng-repeat="timesheet in timesheets">
-            {{timesheet.Id}}
+        <div class="panel search-panel">
+            <h3>Search</h3>
+            <div class="row">
+                <form name="form">
+                    <div class="col-md-12 col-lg-3">
+                        <label for="candidateName">Candidate Name:</label> <input type="text" class="form-control" ng-model="candidateName" name="candidateName" />
+                    </div>
+                    <div class="col-md-12 col-lg-3">
+                        <label for="clientName">Client Name:</label> <input type="text" class="form-control" ng-model="clientName" name="clientName" />
+                    </div>
+                    <div class="col-md-12 col-lg-3">
+                        <label for="fromDate">From Date (DD/MM/YYYY):</label> <input type="text" class="form-control" ng-model="fromDate" moment-valid-date name="fromDate" />
+                        <span class="error" ng-show="form.fromDate.$touched && form.fromDate.$error.momentValidDate">Please enter a valid date</span>
+                    </div>
+                    <div class="col-md-12 col-lg-3">
+                        <label for="toDate">To Date (DD/MM/YYYY):</label><input type="text" class="form-control" ng-model="toDate" moment-valid-date name="toDate" />
+                        <span class="error" ng-show="form.toDate.$touched && form.toDate.$error.momentValidDate">Please enter a valid date</span>
+                    </div>
+                </form>
+            </div>
+            <div class="row button-row">
+                <div class="col-md-2">
+                    <button class="btn btn-default">Print Visible</button>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-default">Delete Visible</button>
+                </div>
+            </div>
+        </div>
+        <div ng-repeat="timesheet in timesheets" class="panel">
+            <table class="table table-bordered">
+                <tr>
+                    <th scope="row">
+                        Candidate Name: 
+                    </th>
+                    <td>
+                        {{timesheet.CandidateName}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Client Name:
+                    </th>
+                    <td>
+                        {{timesheet.ClientName}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Job Title:
+                    </th>
+                    <td>
+                        {{timesheet.JobTitle}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Date:
+                    </th>
+                    <td>
+                        {{getFormattedDate(timesheet.StartDate)}} - {{getFormattedDate(timesheet.EndDate)}}
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="2">Notes</th>
+                </tr>
+                <tr>
+                    <td height="100" colspan="2"></td>
+                </tr>
+            </table>
         </div>
         <div ng-if="timesheets.length === 0">
             No timesheets are available. Click <a href="/#/create">here</a> to generate timesheets.

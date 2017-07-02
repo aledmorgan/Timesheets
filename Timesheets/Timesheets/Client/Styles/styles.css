@@ -18,6 +18,11 @@ h2{
     margin-left:20px;
 }
 
+h3{
+    margin-top:0;
+    font-size:18px;
+}
+
 .no-padding{
     padding:0;
 }
@@ -25,6 +30,8 @@ h2{
 .navbar-wrapper {
     background-color: #25252a;
     height: 100vh;
+    position:fixed;
+    right:0;
 }
 
 .navbar{
@@ -58,3 +65,20 @@ h2{
     .content{
         margin-top:20px;
     }
+
+.panel{
+    border:1px solid #ccc;
+    padding:10px;
+}
+
+.table{
+    border: 1px solid #ddd!important;
+}
+
+.search-panel .form-control{
+    display:inline;
+}
+
+.search-panel .button-row{
+    margin-top:10px;
+}

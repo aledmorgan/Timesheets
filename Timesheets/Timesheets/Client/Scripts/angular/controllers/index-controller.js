@@ -6,12 +6,21 @@ angular.module('timesheetsApp.controllers')
         $scope.loading = true;
         $scope.error = false;
 
+        $scope.candidateName = '';
+        $scope.clientName = '';
+        $scope.dateFrom = '';
+        $scope.dateTo = '';
+
         $scope.$on('$routeChangeSuccess', function () {
             $scope.init();
         })
 
         $scope.init = function () {
             $scope.loadTimesheets();
+        }
+
+        $scope.getFormattedDate = function (date) {
+            return moment(date).format("DD/MM/YYYY");
         }
 
         $scope.loadTimesheets = function () {
