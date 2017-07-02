@@ -125,6 +125,7 @@
     <Content Include="Client\Scripts\angular\controllers\timesheet-controller.js" />
     <Content Include="Client\Scripts\angular\directives\timesheet-directives.js" />
     <Content Include="Client\Scripts\angular\services\timesheet-service.js" />
+    <Content Include="Client\Scripts\misc.js" />
     <Content Include="Client\Styles\styles.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />

@@ -11,7 +11,7 @@ angular.module('timesheetsApp.directives', [])
                         return true;
                     }
 
-                    return moment(value, ["DD/MM/YYYY"], true).isValid();
+                    return ukFormattedMoment(value).isValid();
                 }
             }
         }

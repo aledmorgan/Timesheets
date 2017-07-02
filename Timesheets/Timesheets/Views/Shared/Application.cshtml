@@ -16,11 +16,11 @@
                         <label for="clientName">Client Name:</label> <input type="text" class="form-control" ng-model="clientName" name="clientName" />
                     </div>
                     <div class="col-md-12 col-lg-3">
-                        <label for="fromDate">From Date (DD/MM/YYYY):</label> <input type="text" class="form-control" ng-model="fromDate" moment-valid-date name="fromDate" />
+                        <label for="fromDate">From Date (DD/MM/YYYY):</label> <input type="text" class="form-control" ng-model="dateFrom" moment-valid-date name="fromDate" />
                         <span class="error" ng-show="form.fromDate.$touched && form.fromDate.$error.momentValidDate">Please enter a valid date</span>
                     </div>
                     <div class="col-md-12 col-lg-3">
-                        <label for="toDate">To Date (DD/MM/YYYY):</label><input type="text" class="form-control" ng-model="toDate" moment-valid-date name="toDate" />
+                        <label for="toDate">To Date (DD/MM/YYYY):</label><input type="text" class="form-control" ng-model="dateTo" moment-valid-date name="toDate" />
                         <span class="error" ng-show="form.toDate.$touched && form.toDate.$error.momentValidDate">Please enter a valid date</span>
                     </div>
                 </form>
@@ -34,7 +34,8 @@
                 </div>
             </div>
         </div>
-        <div ng-repeat="timesheet in timesheets" class="panel">
+        <div ng-show="filteredTimesheets.length > 0"><p><strong>{{filteredTimesheets.length}} timesheets found</strong></p></div>
+        <div ng-repeat="timesheet in filteredTimesheets" class="panel">
             <table class="table table-bordered">
                 <tr>
                     <th scope="row">
@@ -78,6 +79,9 @@
         </div>
         <div ng-if="timesheets.length === 0">
             No timesheets are available. Click <a href="/#/create">here</a> to generate timesheets.
+        </div>
+        <div ng-if="timesheets.length > 0 && filteredTimesheets.length === 0">
+            Use the filters above to show results.
         </div>
     </div>
 </script>
